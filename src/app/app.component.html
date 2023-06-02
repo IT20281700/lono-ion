@@ -1,3 +1,14 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content">
+    <ion-content class="ion-content">
+      <ion-img class="cover-bg" src="assets/images/pro-cover.jpg" />
+      <div class="pro-pic-container">
+        <ion-img class="pro-pic" src="assets/images/ic_user_64.png" />
+      </div>
+      <div class="container">
+        <ion-button color="danger" (click)="logout()"> log out </ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

@@ -1,0 +1,253 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <!-- <ion-title>register</ion-title> -->
+    <ion-buttons slot="start">
+      <ion-back-button
+        style="color: white"
+        defaultref="login"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-color">
+  <div class="title">
+    <ion-card-title>Signup</ion-card-title>
+    <ion-card-subtitle
+      >Create your account by filling up the form</ion-card-subtitle
+    >
+  </div>
+  <ion-img class="login-bg" src="assets/images/login_bg_red.jpg" />
+  <ion-card class="ion-no-margin">
+    <ion-card-content>
+      <form
+        [formGroup]="validationFormRegister"
+        (ngSubmit)="RegisterUser(validationFormRegister.value)"
+      >
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon
+              item-left
+              src="../../../assets/icon/tie-bow-title.svg"
+              class="custom_ico"
+            ></ion-icon>
+            Title
+          </ion-label>
+          <ion-select
+            name="user_title"
+            formControlName="user_title"
+            interface="action-sheet"
+          >
+            <ion-select-option value="Mr">Mr</ion-select-option>
+            <ion-select-option value="Mrs">Mrs</ion-select-option>
+            <ion-select-option value="Miss">Miss</ion-select-option>
+            <ion-select-option value="Ms">Ms</ion-select-option>
+            <ion-select-option value="Dr">Dr</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.user_title"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('user_title')?.hasError(validation.type) && (validationFormRegister.get('user_title')?.dirty || validationFormRegister.get('user_title')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon item-left name="document"></ion-icon>
+            First Name
+          </ion-label>
+          <ion-input
+            name="firstname"
+            formControlName="firstname"
+            type="text"
+            placeholder="First name"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.firstname"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('firstname')?.hasError(validation.type) && (validationFormRegister.get('firstname')?.dirty || validationFormRegister.get('firstname')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon item-left name="document"></ion-icon>
+            Last Name
+          </ion-label>
+          <ion-input
+            name="lastname"
+            formControlName="lastname"
+            type="text"
+            placeholder="Last name"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.lastname"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('lastname')?.hasError(validation.type) && (validationFormRegister.get('lastname')?.dirty || validationFormRegister.get('lastname')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon item-left name="calendar"></ion-icon>
+            Birth Date
+          </ion-label>
+          <ion-input
+            name="bdate"
+            type="text"
+            value="{{ selectedBD | date: 'dd-MM-yyyy' }}"
+            id="date"
+          ></ion-input>
+          <ion-popover trigger="date" size="cover">
+            <ng-template>
+              <ion-datetime
+                displayFormat="MM/DD/YYYY"
+                presentation="date"
+                [(ngModel)]="selectedBD"
+                [max]="maxDate"
+                [preferWheel]="true"
+                [showDefaultButtons]="true"
+                mode="ios"
+                formControlName="bdate"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.bdate"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('bdate')?.hasError(validation.type) && (validationFormRegister.get('bdate')?.dirty || validationFormRegister.get('bdate')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon item-left name="mail"></ion-icon>
+            Username
+          </ion-label>
+          <ion-input
+            name="email"
+            formControlName="email"
+            type="email"
+            placeholder="username"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.email"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('email')?.hasError(validation.type) && (validationFormRegister.get('email')?.dirty || validationFormRegister.get('email')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon item-left name="lock-closed"></ion-icon>
+            Password
+          </ion-label>
+          <ion-input
+            name="password"
+            formControlName="password"
+            type="password"
+            placeholder="password"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.password"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('password')?.hasError(validation.type) && (validationFormRegister.get('password')?.dirty || validationFormRegister.get('password')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">
+            <ion-icon item-left name="lock-closed"></ion-icon>
+            Confirm Password
+          </ion-label>
+          <ion-input
+            name="confirm_password"
+            formControlName="confirm_password"
+            type="password"
+            placeholder="retype password"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validationFormRegisterMessage.confirm_password"
+          >
+            <div
+              class="error_message"
+              *ngIf="validationFormRegister.get('confirm_password')?.hasError(validation.type) && (validationFormRegister.get('confirm_password')?.dirty || validationFormRegister.get('confirm_password')?.touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="sign-btn-wrap">
+          <ion-button
+            type="submit"
+            shape="round"
+            fill="solid"
+            class="sign-btn"
+            [disabled]="!validationFormRegister.valid"
+            >Sign Up</ion-button
+          >
+        </div>
+      </form>
+      <div class="text-tag">
+        <span> Sign up with </span>
+      </div>
+      <div class="social-btns">
+        <ion-button fill="clear" class="facebookbtn ion-no-padding">
+          <ion-img src="assets/images/facebook.png"></ion-img>
+        </ion-button>
+        <ion-button fill="clear" class="googlebtn ion-no-padding">
+          <ion-img src="assets/images/google.png"></ion-img>
+        </ion-button>
+        <ion-button fill="clear" class="applebtn ion-no-padding">
+          <ion-img src="assets/images/apple.png"></ion-img>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
